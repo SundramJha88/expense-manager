@@ -68,7 +68,11 @@ exports.editTransactionForm = async (req, res) => {
             req.flash('error_msg', 'Transaction not found');
             return res.redirect('/transactions');
         }
-        res.render('transactions/edit', { transaction });
+        res.render('transactions/edit', { 
+            transaction,
+            incomeCategories: INCOME_CATEGORIES,
+            expenseCategories: EXPENSE_CATEGORIES
+        });
     } catch (error) {
         req.flash('error_msg', 'Error fetching transaction');
         res.redirect('/transactions');
@@ -79,31 +83,24 @@ exports.editTransactionForm = async (req, res) => {
 exports.updateTransaction = async (req, res) => {
     try {
         const { type, category, amount, description } = req.body;
-        const transaction = await Transaction.findByIdAndUpdate(
-            req.params.id,
-            { type, category, amount, description },
-            { new: true }
-        );
-        if (!transaction) {
-            req.flash('error_msg', 'Transaction not found');
-            return res.redirect('/transactions');
-        }
+        await Transaction.findByIdAndUpdate(req.params.id, {
+            type,
+            category,
+            amount,
+            description
+        });
         req.flash('success_msg', 'Transaction updated successfully');
         res.redirect('/transactions');
     } catch (error) {
         req.flash('error_msg', 'Error updating transaction');
-        res.redirect(`/transactions/${req.params.id}/edit`);
+        res.redirect('/transactions');
     }
 };
 
 // Delete transaction
 exports.deleteTransaction = async (req, res) => {
     try {
-        const transaction = await Transaction.findByIdAndDelete(req.params.id);
-        if (!transaction) {
-            req.flash('error_msg', 'Transaction not found');
-            return res.redirect('/transactions');
-        }
+        await Transaction.findByIdAndDelete(req.params.id);
         req.flash('success_msg', 'Transaction deleted successfully');
         res.redirect('/transactions');
     } catch (error) {

@@ -16,15 +16,27 @@
                 <div class="flex justify-between h-16">
                     <div class="flex">
                         <div class="flex-shrink-0 flex items-center">
-                            <a href="/" class="text-xl font-bold text-primary-600 dark:text-primary-400">
+                            <a href="/" class="text-xl font-bold text-primary-600">
                                 Income & Expense Manager
                             </a>
                         </div>
                         <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <a href="/dashboard" class="nav-link">Dashboard</a>
-                            <a href="/stock" class="nav-link">Stock</a>
-                            <a href="/transactions" class="nav-link">Transactions</a>
-                            <a href="/invoices" class="nav-link">Invoices</a>
+                            <a href="/dashboard" 
+                               class="nav-link <%= path === '/dashboard' ? 'border-primary-500 text-gray-900' : 'border-transparent' %>">
+                                Dashboard
+                            </a>
+                            <a href="/stock" 
+                               class="nav-link <%= path === '/stock' ? 'border-primary-500 text-gray-900' : 'border-transparent' %>">
+                                Stock
+                            </a>
+                            <a href="/transactions" 
+                               class="nav-link <%= path === '/transactions' ? 'border-primary-500 text-gray-900' : 'border-transparent' %>">
+                                Transactions
+                            </a>
+                            <a href="/invoices" 
+                               class="nav-link <%= path === '/invoices' ? 'border-primary-500 text-gray-900' : 'border-transparent' %>">
+                                Invoices
+                            </a>
                         </div>
                     </div>
                     <div class="flex items-center">

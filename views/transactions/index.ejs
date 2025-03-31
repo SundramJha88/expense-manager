@@ -1,1 +1,92 @@
- 
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold">Transactions</h1>
+        <a href="/transactions/create" class="btn btn-primary">
+            Add New Transaction
+        </a>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="card bg-green-50">
+            <h3 class="text-lg font-medium text-green-800">Total Income</h3>
+            <p class="text-2xl font-bold text-green-600">Rs. <%= totalIncome.toFixed(2) %></p>
+        </div>
+        
+        <div class="card bg-red-50">
+            <h3 class="text-lg font-medium text-red-800">Total Expense</h3>
+            <p class="text-2xl font-bold text-red-600">Rs. <%= totalExpense.toFixed(2) %></p>
+        </div>
+        
+        <div class="card <%= status === 'Net Profit' ? 'bg-green-50' : 'bg-red-50' %>">
+            <h3 class="text-lg font-medium <%= status === 'Net Profit' ? 'text-green-800' : 'text-red-800' %>">
+                <%= status %>
+            </h3>
+            <p class="text-2xl font-bold <%= status === 'Net Profit' ? 'text-green-600' : 'text-red-600' %>">
+                Rs. <%= netAmount.toFixed(2) %>
+            </p>
+        </div>
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="card">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (transactions && transactions.length > 0) { %>
+                        <% transactions.forEach(transaction => { %>
+                            <tr>
+                                <td><%= transaction.date.toLocaleDateString() %></td>
+                                <td>
+                                    <span class="px-2 py-1 text-xs rounded-full 
+                                        <%= transaction.type === 'income' ? 
+                                            'bg-green-100 text-green-800' : 
+                                            'bg-red-100 text-red-800' %>">
+                                        <%= transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1) %>
+                                    </span>
+                                </td>
+                                <td><%= transaction.category %></td>
+                                <td><%= transaction.description || '-' %></td>
+                                <td class="<%= transaction.type === 'income' ? 'text-green-600' : 'text-red-600' %>">
+                                    Rs. <%= transaction.amount.toFixed(2) %>
+                                </td>
+                                <td>
+                                    <div class="flex space-x-2">
+                                        <a href="/transactions/<%= transaction._id %>/edit" 
+                                           class="text-blue-600 hover:text-blue-800">
+                                            Edit
+                                        </a>
+                                        <form action="/transactions/<%= transaction._id %>?_method=DELETE" 
+                                              method="POST" class="inline">
+                                            <button type="submit" 
+                                                    class="text-red-600 hover:text-red-800"
+                                                    onclick="return confirm('Are you sure you want to delete this transaction?')">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                No transactions found
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

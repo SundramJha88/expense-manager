@@ -5,19 +5,15 @@ const transactionController = require('../controllers/transactionController');
 // Get all transactions
 router.get('/', transactionController.getAllTransactions);
 
-// Show create transaction form
+// Create transaction routes
 router.get('/create', transactionController.createTransactionForm);
-
-// Create new transaction
 router.post('/', transactionController.createTransaction);
 
-// Show edit transaction form
+// Edit transaction routes
 router.get('/:id/edit', transactionController.editTransactionForm);
-
-// Update transaction
 router.put('/:id', transactionController.updateTransaction);
 
-// Delete transaction
+// Delete transaction route
 router.delete('/:id', transactionController.deleteTransaction);
 
 module.exports = router; 
