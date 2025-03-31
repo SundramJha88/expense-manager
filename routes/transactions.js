@@ -15,5 +15,6 @@ router.put('/:id', transactionController.updateTransaction);
 
 // Delete transaction route
 router.delete('/:id', transactionController.deleteTransaction);
+router.post('/delete/:id', transactionController.deleteTransaction);
 
 module.exports = router; 
