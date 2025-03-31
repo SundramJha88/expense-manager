@@ -100,7 +100,8 @@ exports.updateTransaction = async (req, res) => {
 // Delete transaction
 exports.deleteTransaction = async (req, res) => {
     try {
-        await Transaction.findByIdAndDelete(req.params.id);
+        const transactionId = req.params.id;
+        await Transaction.findByIdAndDelete(transactionId);
         req.flash('success_msg', 'Transaction deleted successfully');
         res.redirect('/transactions');
     } catch (error) {
