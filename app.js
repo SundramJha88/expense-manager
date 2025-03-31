@@ -53,7 +53,7 @@ const transactionRoutes = require('./routes/transactions');
 const invoiceRoutes = require('./routes/invoices');
 const dashboardRoutes = require('./routes/dashboard');
 
-app.use('/', dashboardRoutes);  // This should handle the root route
+app.use('/', dashboardRoutes);  
 app.use('/dashboard', dashboardRoutes);
 app.use('/stock', stockRoutes);
 app.use('/transactions', transactionRoutes);
