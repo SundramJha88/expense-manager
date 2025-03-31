@@ -8,15 +8,15 @@
     }
     
     .btn-primary {
-        @apply inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+        @apply bg-primary-600 text-white hover:bg-primary-700;
     }
     
     .btn-secondary {
-        @apply inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+        @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
     }
     
     .card {
-        @apply bg-white rounded-lg shadow-md overflow-hidden;
+        @apply bg-white rounded-lg shadow-md p-6;
     }
     
     .card-header {
@@ -52,7 +52,7 @@
     }
 
     .form-input {
-        @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+        @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500;
     }
     
     .table-container {
@@ -72,11 +72,11 @@
     }
     
     .table tr {
-        @apply hover:bg-gray-50 dark:hover:bg-gray-700;
+        @apply hover:bg-gray-50;
     }
 
     .nav-link {
-        @apply inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 border-transparent hover:border-primary-500 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white;
+        @apply inline-flex items-center px-1 pt-1 text-sm font-medium border-b-2 border-transparent hover:border-primary-500 text-gray-500 hover:text-gray-700;
     }
 
     .badge {
@@ -93,24 +93,23 @@
 }
 
 @media (max-width: 640px) {
-    .responsive-table {
-        @apply block;
+    .dashboard-grid {
+        grid-template-columns: 1fr;
     }
-
-    .responsive-table thead {
-        @apply hidden;
+    
+    .card-stats {
+        margin-bottom: 1rem;
     }
+}
 
-    .responsive-table tbody tr {
-        @apply block border-b border-gray-200;
+@media (max-width: 768px) {
+    .table-container {
+        margin: 0 -1rem;
     }
-
-    .responsive-table tbody td {
-        @apply block text-right py-2 px-4;
-    }
-
-    .responsive-table tbody td::before {
-        content: attr(data-label);
-        @apply float-left font-semibold text-gray-600;
+    
+    .table th,
+    .table td {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 } 

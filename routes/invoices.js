@@ -21,7 +21,7 @@ router.get('/:id/edit', invoiceController.editInvoiceForm);
 router.put('/:id', invoiceController.updateInvoice);
 
 // Delete invoice
-router.delete('/:id', invoiceController.deleteInvoice);
+router.post('/delete/:id', invoiceController.deleteInvoice);
 
 // Add these new routes
 router.get('/:id', invoiceController.viewInvoice);
