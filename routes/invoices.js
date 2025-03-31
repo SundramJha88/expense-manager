@@ -21,10 +21,10 @@ router.get('/:id/edit', invoiceController.editInvoiceForm);
 router.put('/:id', invoiceController.updateInvoice);
 
 // Delete invoice
-router.post('/delete/:id', invoiceController.deleteInvoice);
+router.post('/:id/delete', invoiceController.deleteInvoice);
 
 // Add these new routes
-router.get('/:id', invoiceController.viewInvoice);
+router.get('/:id/view', invoiceController.viewInvoice);
 router.get('/:id/download', invoiceController.downloadInvoice);
 
 module.exports = router; 

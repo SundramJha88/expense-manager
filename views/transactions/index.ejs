@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold text-gray-800">Transactions</h1>
-        <a href="/transactions/create" class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+        <a href="/transactions/create" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-900">
             <i class="fas fa-plus mr-2"></i>
             Add New Transaction
         </a>
@@ -35,7 +35,7 @@
         <div class="bg-white rounded-xl shadow-sm p-6 border <%= status === 'Net Profit' ? 'border-green-100' : 'border-red-100' %>">
             <div class="flex items-center">
                 <div class="p-3 rounded-full <%= status === 'Net Profit' ? 'bg-green-100' : 'bg-red-100' %>">
-                    <i class="fas <%= status === 'Net Profit' ? 'fa-chart-line' : 'fa-chart-line-down' %> <%= status === 'Net Profit' ? 'text-green-600' : 'text-red-600' %> text-xl"></i>
+                    <i class="fas fa-chart-line <%= status === 'Net Profit' ? 'text-green-600' : 'text-red-600' %> text-xl"></i>
                 </div>
                 <div class="ml-4">
                     <h3 class="text-sm font-medium text-gray-500"><%= status %></h3>

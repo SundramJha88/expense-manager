@@ -10,7 +10,7 @@ router.get('/create', transactionController.createTransactionForm);
 router.post('/', transactionController.createTransaction);
 
 // Edit transaction routes
-router.get('/:id/edit', transactionController.editTransactionForm);
+router.get('/edit/:id', transactionController.editTransactionForm);
 router.put('/:id', transactionController.updateTransaction);
 
 // Delete transaction route
