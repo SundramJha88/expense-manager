@@ -29,10 +29,19 @@
     </div>
 
     <!-- Transactions Table -->
-    <div class="card">
-        <div class="table-container">
-            <table class="table">
-                <thead>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold text-gray-800">Transactions</h2>
+                <a href="/transactions/create" class="btn-primary">
+                    <i class="fas fa-plus mr-2"></i>
+                    New Transaction
+                </a>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
                     <tr>
                         <th>Date</th>
                         <th>Type</th>
@@ -42,7 +51,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white divide-y divide-gray-200">
                     <% if (transactions && transactions.length > 0) { %>
                         <% transactions.forEach(transaction => { %>
                             <tr>

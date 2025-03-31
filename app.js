@@ -29,17 +29,20 @@ app.set('layout', 'layouts/main');
 
 // Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'your-secret-key',
+    secret: 'your-secret-key',
     resave: false,
-    saveUninitialized: false,
-    cookie: { secure: process.env.NODE_ENV === 'production' }
+    saveUninitialized: false
 }));
 
-// Flash messages
+// Flash middleware setup
 app.use(flash());
+
+// Global variables for flash messages
 app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
+    res.locals.messages = {
+        success_msg: req.flash('success_msg'),
+        error_msg: req.flash('error_msg')
+    };
     res.locals.path = req.path;  // Makes path available in all views
     next();
 });
