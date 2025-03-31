@@ -1,0 +1,52 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold">Invoice Details</h1>
+        <div class="flex space-x-4">
+            <a href="/invoices" class="btn btn-secondary">
+                Back to Invoices
+            </a>
+            <a href="/invoices/<%= invoice._id %>/download" class="btn btn-primary">
+                Download PDF
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-2">Invoice Information</h2>
+            <p><strong>Date:</strong> <%= invoice.date.toLocaleDateString() %></p>
+            <p><strong>Vendor:</strong> <%= invoice.vendorName %></p>
+            <p><strong>Invoice ID:</strong> #<%= invoice._id.toString().slice(-6).toUpperCase() %></p>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-2">Items</h2>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% invoice.items.forEach(item => { %>
+                            <tr>
+                                <td><%= item.itemId.itemName %></td>
+                                <td><%= item.quantity %></td>
+                                <td>₹<%= item.itemId.price.toFixed(2) %></td>
+                                <td>₹<%= (item.quantity * item.itemId.price).toFixed(2) %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-right">
+            <p class="text-xl font-semibold">Total Amount: ₹<%= invoice.totalAmount.toFixed(2) %></p>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,99 @@
+<div class="max-w-2xl mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold">Create New Invoice</h1>
+        <a href="/invoices" class="btn btn-secondary">
+            Back to Invoices
+        </a>
+    </div>
+
+    <div class="card">
+        <form action="/invoices" method="POST">
+            <div class="space-y-4">
+                <div>
+                    <label for="vendorName" class="block text-sm font-medium text-gray-700">Vendor Name</label>
+                    <input type="text" name="vendorName" id="vendorName" required class="form-input">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Items</label>
+                    <div id="items-container" class="space-y-4">
+                        <div class="item-row grid grid-cols-4 gap-4">
+                            <select name="items[]" class="form-input col-span-2" required>
+                                <option value="">Select Item</option>
+                                <% stock.forEach(item => { %>
+                                    <option value="<%= item._id %>" data-price="<%= item.price %>"><%= item.itemName %> - ₹<%= item.price %></option>
+                                <% }) %>
+                            </select>
+                            <input type="number" name="quantities[]" placeholder="Quantity" min="1" class="form-input" required>
+                            <button type="button" class="remove-item text-red-600 hover:text-red-800">&times;</button>
+                        </div>
+                    </div>
+                    <button type="button" id="add-item" class="mt-2 btn btn-secondary">Add Item</button>
+                </div>
+
+                <div>
+                    <label for="totalAmount" class="block text-sm font-medium text-gray-700">Total Amount</label>
+                    <input type="number" name="totalAmount" id="totalAmount" step="0.01" readonly class="form-input bg-gray-100">
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" class="btn btn-primary">
+                        Create Invoice
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function calculateTotal() {
+    let total = 0;
+    const rows = document.querySelectorAll('.item-row');
+    
+    rows.forEach(row => {
+        const select = row.querySelector('select[name="items[]"]');
+        const quantity = row.querySelector('input[name="quantities[]"]');
+        
+        if(select.value && quantity.value) {
+            const price = parseFloat(select.options[select.selectedIndex].dataset.price);
+            total += price * parseInt(quantity.value);
+        }
+    });
+    
+    document.getElementById('totalAmount').value = total.toFixed(2);
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('items-container');
+    
+    // Initial calculation
+    calculateTotal();
+    
+    // Add event listeners for changes
+    container.addEventListener('change', calculateTotal);
+    container.addEventListener('input', calculateTotal);
+    
+    // Add item button
+    document.getElementById('add-item').addEventListener('click', function() {
+        const newRow = container.children[0].cloneNode(true);
+        newRow.querySelectorAll('input, select').forEach(el => el.value = '');
+        container.appendChild(newRow);
+        
+        // Add event listeners to new row
+        newRow.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('change', calculateTotal);
+            el.addEventListener('input', calculateTotal);
+        });
+    });
+});
+
+document.getElementById('items-container').addEventListener('click', function(e) {
+    if (e.target.classList.contains('remove-item')) {
+        if (document.getElementsByClassName('item-row').length > 1) {
+            e.target.closest('.item-row').remove();
+        }
+    }
+});
+</script> 
